@@ -18,10 +18,6 @@ app.config["api_key"] = "JtF2aUE5SGHfVJBCG5SH"
 
 @app.route('/', method=["GET"])
 def index():
-    logo = "bitmap.png"
-    ph = "ph.png"
-    thermo = "thermo.png"
-    pupuk = "pupuk.png"
     return bottle.template("frontend.html")
 
 
