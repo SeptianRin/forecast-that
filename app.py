@@ -38,10 +38,10 @@ def predict_count(count):
         predict_this.append([])
         if i == 0:
             for j in range(0, 20):
-                predict_this[i].append(1)  # random.random()*100)
+                predict_this[i].append(random.random())
         else:
             temp = predict_this[i-1][1:]
-            temp.append(1)  # random.random()*100)
+            temp.append(random.random())
             predict_this[i].extend(temp)
 
     predict_this = np.array(predict_this).reshape(len(predict_this), 20, 1)
