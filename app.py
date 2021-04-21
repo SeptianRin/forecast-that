@@ -30,10 +30,13 @@ def index():
         return bottle.template("frontend.html")
 
 
-@app.route('/predict/<count>', method=["GET"])
-def predict_count(count):
+@app.route('/predict', method=["GET"])
+def predict_count():
     predict_this = []
-    stop = int(count)
+    data_rapi = []
+    hitTreshold = False
+    waktuHabis = 60
+    stop = 60
     for i in range(stop):
         predict_this.append([])
         if i == 0:
@@ -48,13 +51,19 @@ def predict_count(count):
     model = joblib.load("./model/ari_lstm_model.joblib")
     history = model.predict(predict_this)
     bottle.response.content_type = "application/json"
-    return json.dumps(history.tolist())
+    for index, data in enumerate(history.tolist(), start=1):
+        if(data[0] < 0.30 and hitTreshold == False):
+            hitTreshold = True
+            waktuHabis = index
+        data_rapi.append(data[0])
+
+    return json.dumps([hitTreshold, data_rapi, waktuHabis])
 
 
-# uncomment if deploy on
+# uncomment if deploy on heroku
 if os.environ.get('APP_LOCATION') == 'heroku':
     bottle.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 else:
-    bottle.run(app, host='localhost', port=3000, debug=True)
+    bottle.run(app, host='localhost', port=2999, debug=True)
 # uncomment if deploy on pythonanywhere
 #application = default_app()
