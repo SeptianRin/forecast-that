@@ -10,6 +10,7 @@ import joblib
 import keras
 import numpy as np
 import random
+import requests
 
 
 app = bottle.Bottle()
