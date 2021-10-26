@@ -66,7 +66,7 @@ def predict_test():
     response = requests.get(url=URL)
     predict_this = response
 
-    return json.dumps(predict_this)
+    return predict_this
 
 
 # uncomment if deploy on heroku
