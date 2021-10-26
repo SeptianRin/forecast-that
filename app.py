@@ -59,6 +59,14 @@ def predict_count():
 
     return json.dumps([hitTreshold, data_rapi, waktuHabis])
 
+@app.route('/predicttest', method=["GET"])
+def predict_test():
+    URL = "http://forecast-that.herokuapp.com/predict/60"
+    response = requests.get(url=URL)
+    predict_this = response
+
+    return json.dumps(predict_this)
+
 
 # uncomment if deploy on heroku
 if os.environ.get('APP_LOCATION') == 'heroku':
