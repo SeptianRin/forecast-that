@@ -62,7 +62,7 @@ def predict_count():
 
 @app.route('/predicttest', method=["GET"])
 def predict_test():
-    URL = "http://forecast-that.herokuapp.com/predict/60"
+    URL = "http://hidroponia-app.herokuapp.com/api/lihat/60"
     response = requests.get(url=URL)
     predict_this = response
 
